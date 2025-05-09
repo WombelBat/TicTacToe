@@ -69,14 +69,44 @@ char *constructBoard(const int gamePoz[9], char Xchar, char Ochar)
   strcat(gameboard, rowPrint);
 }
 
-void moveX(int poz[9], char x)
+int checkValidity(int poz[9], int choice)
 {
+  int cor = 1;
+  for (int i = 0; i < 9; i++)
+  {
+    if (!poz[i])
+      cor = 0;
+  }
+
+  return cor;
+}
+
+void moveX(int *poz[9], int xORo, char x)
+{
+  int choice;
+  do
+  {
+    printf("Enter a number from 1 to 9 representing the position of your charecter: ");
+    scanf("%d", &choice);
+    if (checkValidity(*poz, choice))
+    {
+      printf("\n space is ocupied renter ");
+    }
+  } while (checkValidity(*poz, choice));
+  if (xORo)
+  {
+    *poz[choice] = 1;
+  }
+  else
+  {
+    *poz[choice] = -1;
+  }
 }
 void ticTacToeGame()
 {
   printf("Start of game:\n");
-  char x = 'X';
-  char o = 'O';
+  char x = 'X'; // not -
+  char o = 'O'; // not -
   int poz[9] = {0, 0, 0, 0, 0, 0, 0, 0, 0};
 
   char *game = constructBoard(poz, x, o);
