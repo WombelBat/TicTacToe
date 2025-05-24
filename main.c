@@ -69,7 +69,7 @@ char *constructBoard(const int gamePoz[9], char Xchar, char Ochar)
   strcat(gameboard, rowPrint);
 }
 
-int checkValidity(int poz[9], int choice)
+int checkValidity(const int poz[9], const int choice)
 {
   int cor = 1;
   for (int i = 0; i < 9; i++)
@@ -81,7 +81,7 @@ int checkValidity(int poz[9], int choice)
   return cor;
 }
 
-void moveX(int *poz[9], int xORo, char x)
+void playerMove(int *poz[9], const int xORo_flag)
 {
   int choice;
   do
@@ -93,7 +93,7 @@ void moveX(int *poz[9], int xORo, char x)
       printf("\n space is ocupied renter ");
     }
   } while (checkValidity(*poz, choice));
-  if (xORo)
+  if (xORo_flag)
   {
     *poz[choice] = 1;
   }
@@ -101,6 +101,19 @@ void moveX(int *poz[9], int xORo, char x)
   {
     *poz[choice] = -1;
   }
+}
+
+int winCheck(const int board[9], const int poz, int xORo_flag)
+{
+  if (xORo_flag)
+  {
+    xORo_flag = 1;
+  }
+  else
+    xORo_flag = -1;
+}
+void aiMove(int *poz[9], const int xORo_flag)
+{
 }
 void ticTacToeGame()
 {
